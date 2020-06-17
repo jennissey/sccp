@@ -1,0 +1,552 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Bookinfo Combined Swagger Documentation",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/products": {
+      "get": {
+        "tags": [
+          "BookInfo Productpage: product"
+        ],
+        "summary": "List all products",
+        "description": "List all products available in the application with a minimum amount of information.",
+        "operationId": "getProducts",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "description": "Basic information about a product",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Product id"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Title of the book"
+                  },
+                  "descriptionHtml": {
+                    "type": "string",
+                    "description": "Description of the book - may contain HTML tags"
+                  }
+                },
+                "required": [
+                  "id",
+                  "title",
+                  "descriptionHtml"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "tags": [
+          "BookInfo Productpage: product"
+        ],
+        "summary": "Get individual product",
+        "description": "Get detailed information about an individual product with the given id.",
+        "operationId": "getProductProductpage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Product id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "description": "Detailed information about a product",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Product id"
+                },
+                "publisher": {
+                  "type": "string",
+                  "description": "Publisher of the book"
+                },
+                "language": {
+                  "type": "string",
+                  "description": "Language of the book"
+                },
+                "author": {
+                  "type": "string",
+                  "description": "Author of the book"
+                },
+                "ISBN-10": {
+                  "type": "string",
+                  "description": "ISBN-10 of the book"
+                },
+                "ISBN-13": {
+                  "type": "string",
+                  "description": "ISBN-13 of the book"
+                },
+                "year": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Year the book was first published in"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "paperback",
+                    "hardcover"
+                  ],
+                  "description": "Type of the book"
+                },
+                "pages": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Number of pages of the book"
+                }
+              },
+              "required": [
+                "id",
+                "publisher",
+                "language",
+                "author",
+                "ISBN-10",
+                "ISBN-13",
+                "year",
+                "type",
+                "pages"
+              ]
+            }
+          },
+          "400": {
+            "description": "Invalid product id"
+          }
+        }
+      }
+    },
+    "/products/{id}/reviews": {
+      "get": {
+        "tags": [
+          "BookInfo Productpage: review"
+        ],
+        "summary": "Get reviews for a product",
+        "description": "Get reviews for a product, including review text and possibly ratings information.",
+        "operationId": "getProductReviewsProductpage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Product id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "description": "Object containing reviews for a product",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Product id"
+                },
+                "reviews": {
+                  "type": "array",
+                  "description": "List of reviews",
+                  "items": {
+                    "type": "object",
+                    "description": "Review of a product",
+                    "properties": {
+                      "reviewer": {
+                        "type": "string",
+                        "description": "Name of the reviewer"
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "Review text"
+                      },
+                      "rating": {
+                        "type": "object",
+                        "description": "Rating of a product",
+                        "properties": {
+                          "stars": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 1,
+                            "maximum": 5,
+                            "description": "Number of stars"
+                          },
+                          "color": {
+                            "type": "string",
+                            "enum": [
+                              "red",
+                              "black"
+                            ],
+                            "description": "Color in which stars should be displayed"
+                          }
+                        },
+                        "required": [
+                          "stars",
+                          "color"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "reviewer",
+                      "text"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "id",
+                "reviews"
+              ]
+            }
+          },
+          "400": {
+            "description": "Invalid product id"
+          }
+        }
+      }
+    },
+    "/products/{id}/ratings": {
+      "get": {
+        "tags": [
+          "BookInfo Productpage: rating"
+        ],
+        "summary": "Get ratings for a product",
+        "description": "Get ratings for a product, including stars and their color.",
+        "operationId": "getProductRatingsProductpage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Product id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "description": "Object containing ratings of a product",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Product id"
+                },
+                "ratings": {
+                  "type": "object",
+                  "description": "A hashmap where keys are reviewer names, values are number of stars",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "id",
+                "ratings"
+              ]
+            }
+          },
+          "400": {
+            "description": "Invalid product id"
+          }
+        }
+      }
+    },
+    "/details/{id}": {
+      "get": {
+        "tags": [
+          "BookInfo Details: details"
+        ],
+        "summary": "Get details about a book",
+        "description": "Get detailed information about an individual product with the given id.",
+        "operationId": "getDetails",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Product id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "description": "Detailed information about a product",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Product id"
+                },
+                "publisher": {
+                  "type": "string",
+                  "description": "Publisher of the book"
+                },
+                "language": {
+                  "type": "string",
+                  "description": "Language of the book"
+                },
+                "author": {
+                  "type": "string",
+                  "description": "Author of the book"
+                },
+                "ISBN-10": {
+                  "type": "string",
+                  "description": "ISBN-10 of the book"
+                },
+                "ISBN-13": {
+                  "type": "string",
+                  "description": "ISBN-13 of the book"
+                },
+                "year": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Year the book was first published in"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "paperback",
+                    "hardcover"
+                  ],
+                  "description": "Type of the book"
+                },
+                "pages": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Number of pages of the book"
+                }
+              },
+              "required": [
+                "id",
+                "publisher",
+                "language",
+                "author",
+                "ISBN-10",
+                "ISBN-13",
+                "year",
+                "type",
+                "pages"
+              ]
+            }
+          },
+          "400": {
+            "description": "Invalid product id"
+          }
+        }
+      }
+    },
+    "/ratings/{id}": {
+      "get": {
+        "tags": [
+          "BookInfo Ratings: ratings"
+        ],
+        "summary": "Get ratings for a product",
+        "description": "Get ratings for a product, including stars and their color.",
+        "operationId": "getProductRatings",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Product id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "description": "Object containing ratings of a product",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Product id"
+                },
+                "ratings": {
+                  "type": "object",
+                  "description": "A hashmap where keys are reviewer names, values are number of stars",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "id",
+                "ratings"
+              ]
+            }
+          },
+          "400": {
+            "description": "Invalid product id"
+          },
+          "500": {
+            "description": "No connection to ratings database"
+          }
+        }
+      }
+    },
+    "/reviews/{id}": {
+      "get": {
+        "tags": [
+          "BookInfo Reviews: reviews"
+        ],
+        "summary": "Get reviews for a product",
+        "description": "Get reviews for a product, including review text and possibly ratings information.",
+        "operationId": "getProductReviews",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Product id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "description": "Object containing reviews for a product",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "Product id"
+                },
+                "reviews": {
+                  "type": "array",
+                  "description": "List of reviews",
+                  "items": {
+                    "type": "object",
+                    "description": "Review of a product",
+                    "properties": {
+                      "reviewer": {
+                        "type": "string",
+                        "description": "Name of the reviewer"
+                      },
+                      "text": {
+                        "type": "string",
+                        "description": "Review text"
+                      },
+                      "rating": {
+                        "type": "object",
+                        "description": "Rating of a product",
+                        "properties": {
+                          "stars": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 1,
+                            "maximum": 5,
+                            "description": "Number of stars"
+                          },
+                          "color": {
+                            "type": "string",
+                            "enum": [
+                              "red",
+                              "black"
+                            ],
+                            "description": "Color in which stars should be displayed"
+                          }
+                        },
+                        "required": [
+                          "stars",
+                          "color"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "reviewer",
+                      "text"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "id",
+                "reviews"
+              ]
+            }
+          },
+          "400": {
+            "description": "Invalid product id"
+          }
+        }
+      }
+    }
+  }
+}

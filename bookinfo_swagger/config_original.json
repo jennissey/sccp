@@ -1,0 +1,22 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Bookinfo Combined Swagger Documentation",
+    "version": "1.0.0"
+  },
+  "apis": [
+    {
+      "url": "http://localhost/bookinfo_swagger/productpage.yaml"
+    },
+    {
+      "url": "http://localhost/bookinfo_swagger/details.yaml"
+    },
+    {
+      "url": "http://localhost/bookinfo_swagger/ratings.yaml"
+    },
+    {
+      "url": "http://localhost/bookinfo_swagger/reviews.yaml"
+    }
+  ]
+}
+

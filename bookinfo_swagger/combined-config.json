@@ -1,0 +1,43 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Bookinfo Combined Swagger Documentation",
+    "version": "1.0.0"
+  },
+  "apis": [
+    {
+      "url": "http://localhost/bookinfo_swagger/productpage.yaml",
+      "tags": {
+        "rename": {
+          "product": "BookInfo Productpage: product",
+          "rating": "BookInfo Productpage: rating",
+          "review": "BookInfo Productpage: review"
+        }
+      }
+    },
+    {
+      "url": "http://localhost/bookinfo_swagger/details.yaml",
+      "tags": {
+        "rename": {
+          "details": "BookInfo Details: details"
+        }
+      }
+    },
+    {
+      "url": "http://localhost/bookinfo_swagger/ratings.yaml",
+      "tags": {
+        "rename": {
+          "ratings": "BookInfo Ratings: ratings"
+        }
+      }
+    },
+    {
+      "url": "http://localhost/bookinfo_swagger/reviews.yaml",
+      "tags": {
+        "rename": {
+          "reviews": "BookInfo Reviews: reviews"
+        }
+      }
+    }
+  ]
+}
